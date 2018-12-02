@@ -2,7 +2,7 @@
     <string name="app_name">Grouper</string>
     <string name="project_name">Enter your Project Name</string>
     <string name="back">Back</string>
-    <string name="course">Enter the associated course, i.e. EC327</string>
+    <string name="course">Enter the course, i.e. EC327</string>
     <string name="team_name">Enter your Team Name</string>
     <string name="project_deadline">Project Deadline:</string>
     <string name="project_deadline_input">12/12/2018</string>
@@ -11,7 +11,7 @@
     <string name="maxCapacity">Maximum Capacity:</string>
     <string name="maxCapacityInput">1</string>
     <string name="create">Create</string>
-    <string name="confirmationAlert">Project Group has been successfully created. You may create another if you\'d like.</string>
+    <string name="confirmationAlert">Project Group has been successfully created.</string>
     <string name="need_a_new_account">Need a new Account?</string>
     <string name="createProjectGroup">Are you sure you would like to create the project group with these details? Please note that once created, the information cannot be changed.</string>
     <string name="enter_your_email">Enter your email</string>
@@ -21,4 +21,7 @@
     <string name="register_user">Register User</string>
     <string name="already_registered_sign_in">Already Registered? Sign in here</string>
     <string name="register">Register</string>
+    <string name="logout">Logout</string>
+    <string name="current_projects">Current Projects</string>
+    <string name="createGroup">Create Group</string>
 </resources>

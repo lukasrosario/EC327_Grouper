@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button currentprojbutton;
+    private Button createGroupButton;
 
     private FirebaseAuth firebaseAuth;
 
@@ -49,10 +50,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        createGroupButton = (Button) findViewById(R.id.buttonCreateGroup);
+        createGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivityCreateGroup();
+            }
+        });
+
     }
 
     private void openActivityCurrentProj() {
         Intent intent = new Intent(this, CurrentProjActivity.class);
+        startActivity(intent);
+    }
+
+    private void openActivityCreateGroup() {
+        Intent intent = new Intent(this, CreateGroupActivity.class);
         startActivity(intent);
     }
 

@@ -19,8 +19,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
 
 import org.w3c.dom.Text;
 
@@ -74,6 +78,39 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         buttonRegister.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
+
+        userRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+                user user = dataSnapshot.getValue(user.class);
+                String uid = dataSnapshot.getKey();
+                System.out.println("UID: " + user.uid);
+                System.out.println("First name:" + user.firstName);
+                System.out.println("Last name: " + user.lastName);
+                System.out.println("Email: " + user.email);
+                System.out.println("Project Groups: " + user.projectGroups);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
+                Log.d("Changed", "project group with uid: " + dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                Log.d("Removed","project group with uid: " + dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {
+                Log.d("Moved","project group with uid: " + dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("Cancel:",databaseError.toString());
+            }
+        });
     }
 
     private void registerUser() {
@@ -104,9 +141,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         if(task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                             finish();
-
-                            //random comment
-                            addUserToDB(firebaseAuth.getCurrentUser().getUid()); //will this work...needs the person to be registered first
+                            addUserToDB(firebaseAuth.getCurrentUser().getUid());
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }
                         else {

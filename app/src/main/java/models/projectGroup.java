@@ -19,7 +19,7 @@ import java.util.Map;
 public class projectGroup {
     public String groupID;
     public int maxCapacity;
-    public int currentNumMembers;
+    private int currentNumMembers;
     public String course;
     public String teamName;
     public String projectTitle;

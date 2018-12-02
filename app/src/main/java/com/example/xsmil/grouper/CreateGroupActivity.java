@@ -11,22 +11,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 import models.projectGroup;
+import models.user;
 
 public class CreateGroupActivity extends AppCompatActivity {
 
     DatabaseReference db;
     DatabaseReference projectGroupRef;
+    DatabaseReference userRef;
+    FirebaseAuth firebaseAuth;
 
     Button back;
     Button create;
@@ -40,6 +45,8 @@ public class CreateGroupActivity extends AppCompatActivity {
 
         db = FirebaseDatabase.getInstance().getReference();
         projectGroupRef = db.child("projectGroups");
+        firebaseAuth = FirebaseAuth.getInstance();
+        userRef = db.child("users");
 
         back = (Button) findViewById(R.id.btn_back);
         create = (Button) findViewById(R.id.btn_create);
@@ -172,15 +179,19 @@ public class CreateGroupActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Please enter a number for max capacity", Toast.LENGTH_SHORT).show();
                         }
 
+                        String currentUid = firebaseAuth.getCurrentUser().getUid();
+
                         projectGroup projGroup = new projectGroup(course, teamName, projectName, projectDeadline, description, Integer.parseInt(maxCapacity));
                         projGroup.setGroupID(groupID);
-                        projGroup.addMember("U41243664");
+                        projGroup.addMember(currentUid);
                         Map<String, Object> projectGroupValues = projGroup.toMap();
 
                         projectGroupRef.child(groupID).setValue(projectGroupValues);
-
                         confirmationAlert();
 
+                        goToMain();
+
+                        addGroupToUserInDB(groupID);
                     }
                 }).create()
                 .show();
@@ -204,6 +215,27 @@ public class CreateGroupActivity extends AppCompatActivity {
                     }
                 }).create()
                 .show();
+    }
+
+    public void addGroupToUserInDB(String groupID) {
+
+        final String currentUid = firebaseAuth.getCurrentUser().getUid();
+        final String groupIDFinal = groupID;
+
+        ValueEventListener userListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                user user = dataSnapshot.getValue(user.class);
+                user.addGroup(groupIDFinal);
+                db.child("users").child(currentUid).child("projectGroups").setValue(user.projectGroups);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w( "Cancel:","loadUser:onCancelled", databaseError.toException());
+            }
+        };
+        db.child("users").child(currentUid).addValueEventListener(userListener);
     }
 
 /*    public void updateProjGroup() {

@@ -104,6 +104,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         if(task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                             finish();
+
+                            //random comment
                             addUserToDB(firebaseAuth.getCurrentUser().getUid()); //will this work...needs the person to be registered first
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }

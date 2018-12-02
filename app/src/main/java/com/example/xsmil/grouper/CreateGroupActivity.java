@@ -217,6 +217,7 @@ public class CreateGroupActivity extends AppCompatActivity {
                 .show();
     }
 
+    // need to figure this out
     public void addGroupToUserInDB(String groupID) {
 
         final String currentUid = firebaseAuth.getCurrentUser().getUid();

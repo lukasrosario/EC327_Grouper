@@ -1,0 +1,46 @@
+{
+  "rules": {
+    // only authenticated users can read/write data
+    ".read": "auth != null",
+    ".write": "auth != null",
+
+    // User profiles are only readable/writable by the user who owns it
+    "users": {
+      "$BUID": {
+        ".read": "auth.buid == $BUID",
+        ".write": "auth.buid == $BUID",
+        ".validate": "newData.child('firstName').isString() &&
+                      newData.child('lastName').isString() &&
+                      newData.child('email').isString() && 
+                      newData.child('email').childval().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i)"
+      },
+
+      // User can only update own group memberships
+      "groups": {
+          "$GROUPID" : {
+              ".validate": "auth.groupid == $GROUPID"
+          }
+      }
+    },
+
+    // Project Groups can be viewed/read by anyone but only created/written by logged-in users.
+    "projectGroups": {
+      ".read": true,
+      ".write": "auth.buid != null",
+
+      "$GROUPID": {
+        // BUID must match logged in user and is fixed once set
+        "buid": {
+          ".validate": "(data.exists() && data.val() == newData.val()) || newData.val() == auth.buid"
+        },
+
+        // User can only update own group memberships
+        "members": {
+          "$BUID": {
+              ".validate": "auth.buid == $BUID"
+          }
+        }
+      }
+    }
+  }
+}

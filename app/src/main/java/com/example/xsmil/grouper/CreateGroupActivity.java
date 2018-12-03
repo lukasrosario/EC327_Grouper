@@ -234,6 +234,9 @@ public class CreateGroupActivity extends AppCompatActivity {
 
                 Map<String, Object> updatedUserValues = currentUser.toMap();
                 userRef.child(currentUid).setValue(updatedUserValues);
+
+                DatabaseReference projGroupMembersRef = db.child("projGroupMembers");
+                projGroupMembersRef.child(groupIDFinal).child(currentUid).setValue(updatedUserValues);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

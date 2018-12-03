@@ -4,7 +4,7 @@
     <string name="back">Back</string>
     <string name="course">Enter the course, i.e. EC327</string>
     <string name="team_name">Enter your Team Name</string>
-    <string name="project_deadline">Project Deadline:</string>
+    <string name="project_deadline">Project Deadline (mm/dd/yyyy):</string>
     <string name="project_deadline_input">12/12/2018</string>
     <string name="deadline_to_form_group">Deadline to Form Group</string>
     <string name="project_description">Enter description of project</string>

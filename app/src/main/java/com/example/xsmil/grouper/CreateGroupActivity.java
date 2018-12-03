@@ -18,9 +18,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.Query;
 
+import java.sql.Ref;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.Map;
 
 import models.projectGroup;
@@ -166,7 +169,7 @@ public class CreateGroupActivity extends AppCompatActivity {
                         String description = descriptionInput.getText().toString();
                         String maxCapacity = maxCapacityInput.getText().toString();
 
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // this needs to match the pattern of how it's entered in the string...may need to update depending on front-end
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy"); // this needs to match the pattern of how it's entered in the string...may need to update depending on front-end
                         LocalDate projectDeadline = LocalDate.parse(projectDeadlineString, formatter);
 //                        LocalDate groupFormDeadline = LocalDate.parse(groupFormDeadlineString, formatter);
 
@@ -187,11 +190,11 @@ public class CreateGroupActivity extends AppCompatActivity {
                         Map<String, Object> projectGroupValues = projGroup.toMap();
 
                         projectGroupRef.child(groupID).setValue(projectGroupValues);
-                        confirmationAlert();
-
-                        goToMain();
 
                         addGroupToUserInDB(groupID);
+
+                        confirmationAlert();
+                        goToMain();
                     }
                 }).create()
                 .show();
@@ -223,20 +226,20 @@ public class CreateGroupActivity extends AppCompatActivity {
         final String currentUid = firebaseAuth.getCurrentUser().getUid();
         final String groupIDFinal = groupID;
 
-        ValueEventListener userListener = new ValueEventListener() {
+        userRef.child(currentUid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                user user = dataSnapshot.getValue(user.class);
-                user.addGroup(groupIDFinal);
-                db.child("users").child(currentUid).child("projectGroups").setValue(user.projectGroups);
-            }
+                user currentUser = dataSnapshot.getValue(user.class);
+                currentUser.addGroup(groupIDFinal);
 
+                Map<String, Object> updatedUserValues = currentUser.toMap();
+                userRef.child(currentUid).setValue(updatedUserValues);
+            }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w( "Cancel:","loadUser:onCancelled", databaseError.toException());
+                Log.e("Cancel: ", "onCancelled", databaseError.toException());
             }
-        };
-        db.child("users").child(currentUid).addValueEventListener(userListener);
+        });
     }
 
 /*    public void updateProjGroup() {

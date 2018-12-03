@@ -120,7 +120,7 @@ public class CreateGroupActivity extends AppCompatActivity {
     }
 
     public void goToMain() {
-        Intent intent = new Intent(this, MainActivity.class); // need appropriate name for main page here
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

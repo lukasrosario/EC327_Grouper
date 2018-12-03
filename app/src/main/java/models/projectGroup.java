@@ -1,9 +1,19 @@
 package models;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
+
+import com.example.xsmil.grouper.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,8 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-// START Users class
 
 @IgnoreExtraProperties
 // will use push() method in Firebase DB to assign random groupIDs
@@ -65,10 +73,50 @@ public class projectGroup {
         this.groupID = groupID;
     }
 
+    // defining a destructor for the projectGroup class
+    // this needs to be tested but cannot until the project display page is created
     public void removeGroup () {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         DatabaseReference projGroupReference = db.child("projectGroups");
-        projGroupReference.child(this.groupID).setValue(null);
+        DatabaseReference projGroupMembersRef = db.child("projGroupMembers");
+        projGroupReference.child(this.groupID).setValue(null); // removes projectGroup from projectGroup node in DB
+        projGroupMembersRef.child(groupID).setValue(null); // removes projectGroup from projGroupMembers node in DB
+
+        final DatabaseReference userReference = db.child("users");
+        final String groupID = this.groupID;
+
+        userReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+                    user currentUser = singleSnapshot.getValue(user.class);
+                    String currentUid = currentUser.uid;
+                    currentUser.removeGroup(groupID);
+
+                    Map<String, Object> updatedUserValues = currentUser.toMap();
+                    userReference.child(currentUid).setValue(updatedUserValues);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("Cancel: ", "onCancelled", databaseError.toException());
+            }
+        });
+
+// not really sure it is good design to implement this within the class
+//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(/*need activity here*/);
+/*        alertDialogBuilder.setMessage(R.string.deleteGroupAlert);
+
+        // creates pop-up dialog to confirm that project group has been deleted to user
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("OK",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+                        // does nothing
+                    }
+                }).create()
+                .show();*/
     }
 
     public void setProjectDeadline (String projectDeadlineString) {
@@ -110,5 +158,3 @@ public class projectGroup {
         return result;
     }
 }
-
-// END Users class

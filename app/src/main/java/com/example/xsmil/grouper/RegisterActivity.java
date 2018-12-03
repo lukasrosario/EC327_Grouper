@@ -139,9 +139,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
+                            addUserToDB(firebaseAuth.getCurrentUser().getUid());                            
                             Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                             finish();
-                            addUserToDB(firebaseAuth.getCurrentUser().getUid());
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }
                         else {

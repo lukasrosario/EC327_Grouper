@@ -23,6 +23,7 @@ import com.google.firebase.database.Query;
 import java.sql.Ref;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -169,9 +170,17 @@ public class CreateGroupActivity extends AppCompatActivity {
                         String description = descriptionInput.getText().toString();
                         String maxCapacity = maxCapacityInput.getText().toString();
 
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy"); // this needs to match the pattern of how it's entered in the string...may need to update depending on front-end
-                        LocalDate projectDeadline = LocalDate.parse(projectDeadlineString, formatter);
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 //                        LocalDate groupFormDeadline = LocalDate.parse(groupFormDeadlineString, formatter);
+
+                        // checks to make sure date is in the correct format
+                        try {
+                            LocalDate projectDeadline = LocalDate.parse(projectDeadlineString, formatter);
+                            Log.i("",projectDeadlineString+" is in valid date format");
+                        } catch (DateTimeParseException e) {
+                            Log.i("",projectDeadlineString+" is not in valid date format");
+                            Toast.makeText(getApplicationContext(), "Please enter the date with the format mm/dd/yyyy.", Toast.LENGTH_SHORT).show();
+                        }
 
                         // checks to make sure maximum capacity is a number entered. -- could probably do something similar for LocalDate, but need to know what exception would be thrown if not
                         try {
@@ -184,7 +193,7 @@ public class CreateGroupActivity extends AppCompatActivity {
 
                         String currentUid = firebaseAuth.getCurrentUser().getUid();
 
-                        projectGroup projGroup = new projectGroup(course, teamName, projectName, projectDeadline, description, Integer.parseInt(maxCapacity));
+                        projectGroup projGroup = new projectGroup(course, teamName, projectName, LocalDate.parse(projectDeadlineString, formatter), description, Integer.parseInt(maxCapacity));
                         projGroup.setGroupID(groupID);
                         projGroup.addMember(currentUid);
                         Map<String, Object> projectGroupValues = projGroup.toMap();

@@ -162,7 +162,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String lastName = editTextLastName.getText().toString().trim();
 
         user user = new user(uid, firstName, lastName, email);
-        user.addGroup("0");
+//        user.addGroup("0");
         Map<String, Object> userValues = user.toMap();
 
         userRef.child(uid).setValue(userValues);

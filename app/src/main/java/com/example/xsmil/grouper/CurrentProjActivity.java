@@ -33,6 +33,7 @@ import models.user;
 public class CurrentProjActivity extends AppCompatActivity {
 
     private Button creategroupbutton;
+    private Button backButton;
     private TextView textViewUserEmail;
     private TextView textViewUserFull;
 
@@ -58,20 +59,26 @@ public class CurrentProjActivity extends AppCompatActivity {
             }
         });
 
+        backButton = (Button) findViewById(R.id.btn_back);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivityMain();
+            }
+        });
+
         // If the user is not signed in, it opens LoginActivity.
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() == null) {
             startActivity(new Intent(this, LoginActivity.class));
         }
-        // Displays the users email in TextView using FireBase Authentication.
+
+        // Displays the user's email in TextView using FireBase Authentication.
         final FirebaseUser user = firebaseAuth.getCurrentUser();
         textViewUserEmail = (TextView) findViewById(R.id.TextViewUserEmail);
         textViewUserEmail.setText(user.getEmail());
 
-
         textViewUserFull = (TextView) findViewById(R.id.textViewUserFull);
-
-
         // Retrieves first and last name from user class in FireBase Database
         // Concatenates the first and last name and sets the textView to display the Full Name.
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -94,6 +101,11 @@ public class CurrentProjActivity extends AppCompatActivity {
 
     private void openActivityCreateGroup() {
         Intent intent = new Intent(this, CreateGroupActivity.class);
+        startActivity(intent);
+    }
+
+    private void openActivityMain() {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

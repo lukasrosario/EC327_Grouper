@@ -45,5 +45,4 @@
             android:textIsSelectable="true"
             tools:text="12/12/2018" />
     </LinearLayout>
-
 </RelativeLayout>

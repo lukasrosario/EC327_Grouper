@@ -51,16 +51,16 @@ public class projectGroup {
         currentNumMembers = 0;
     }
 
-    public void addMember (String buid) {
+    public void addMember (String uid) {
         if (currentNumMembers != maxCapacity) {
-            members.add(buid);
+            members.add(uid);
             currentNumMembers++;
         }
     }
 
-    public void removeMember (String buid) {
-        if (members.contains(buid)) {
-            members.remove(buid);
+    public void removeMember (String uid) {
+        if (members.contains(uid)) {
+            members.remove(uid);
             currentNumMembers--;
         }
     }

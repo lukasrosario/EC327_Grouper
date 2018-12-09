@@ -55,6 +55,7 @@
         android:clipToPadding="false"
         android:padding="16dp"
         android:scrollbars="vertical"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:stackFromEnd="true"
         app:reverseLayout="true"
         tools:listitem="@layout/group" />

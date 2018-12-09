@@ -20,6 +20,9 @@
         <activity android:name=".CreateGroupActivity"></activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".CurrentProjActivity"></activity>
+        <activity android:name=".HasAuthActivity"></activity>
+        <activity android:name=".ProjectActivity"></activity>
+        <activity android:name=".ProjectNoPermissionActivity"></activity>
     </application>
 
 </manifest>

@@ -18,13 +18,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.Query;
 
-import java.sql.Ref;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.HashMap;
 import java.util.Map;
 
 import models.projectGroup;
@@ -142,11 +139,11 @@ public class CreateGroupActivity extends AppCompatActivity {
         final String groupID = projectGroupRef.push().getKey();
 
         final EditText projectNameInput = (EditText) findViewById(R.id.proj_name);
-        final EditText courseInput = (EditText) findViewById(R.id.course);
-        final EditText teamNameInput = (EditText) findViewById(R.id.team_name);
+        final EditText courseInput = (EditText) findViewById(R.id.etCourse);
+        final EditText teamNameInput = (EditText) findViewById(R.id.etTeamName);
         final EditText projectDeadlineInput = (EditText) findViewById(R.id.proj_deadline_input);
 //        final EditText groupFormDeadlineInput = (EditText) findViewById(R.id.form_group_deadline);
-        final EditText descriptionInput = (EditText) findViewById(R.id.description);
+        final EditText descriptionInput = (EditText) findViewById(R.id.etDescription);
         final EditText maxCapacityInput = (EditText) findViewById(R.id.max_capacity_input);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);

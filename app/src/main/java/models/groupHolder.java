@@ -13,8 +13,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.xsmil.grouper.CurrentProjActivity;
+import com.example.xsmil.grouper.HasAuthActivity;
 import com.example.xsmil.grouper.MainActivity;
 import com.example.xsmil.grouper.R;
+import com.example.xsmil.grouper.RegisterActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -74,7 +76,7 @@ public class groupHolder extends RecyclerView.ViewHolder implements View.OnClick
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(mContext, CurrentProjActivity.class); // this should go to the project group details page; just using placeholder for now
+        Intent intent = new Intent(mContext, HasAuthActivity.class); // this should go to the project group details page; just using placeholder for now
         intent.putExtra("groupID", groupID); // not sure if this is right; made it get the groupID of most recently added group to ArrayList
         mContext.startActivity(intent);
     }

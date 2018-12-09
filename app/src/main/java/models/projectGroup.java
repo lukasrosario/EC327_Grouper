@@ -73,6 +73,11 @@ public class projectGroup {
         this.groupID = groupID;
     }
 
+    public int getCurrentNumMembers() {
+        return currentNumMembers;
+    }
+
+
     // defining a destructor for the projectGroup class
     // this needs to be tested but cannot until the project display page is created
     public void removeGroup () {

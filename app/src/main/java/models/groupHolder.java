@@ -76,8 +76,8 @@ public class groupHolder extends RecyclerView.ViewHolder implements View.OnClick
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(mContext, HasAuthActivity.class); // this should go to the project group details page; just using placeholder for now
-        intent.putExtra("groupID", groupID); // not sure if this is right; made it get the groupID of most recently added group to ArrayList
+        Intent intent = new Intent(mContext, HasAuthActivity.class);
+        intent.putExtra("groupID", groupID);
         mContext.startActivity(intent);
     }
 }

@@ -87,7 +87,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
                 userList.clear();
 
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    String userId = (String) userSnapshot.getValue();
+                    String userId = userSnapshot.getKey().toString();
                     userID.add(userId);
                 }
                 databaseReferenceUsers.addValueEventListener(new ValueEventListener() {

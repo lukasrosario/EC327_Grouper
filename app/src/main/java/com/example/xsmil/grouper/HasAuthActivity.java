@@ -32,10 +32,10 @@ public class HasAuthActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
-                    if(currentUser.equals(dataSnapshot1.getValue(String.class))){
-                        Intent newActvity = new Intent(getApplicationContext(), ProjectActivity.class);
-                        newActvity.putExtra("groupID",value);
-                        startActivity(newActvity);
+                    if(currentUser.equals(dataSnapshot1.getKey().toString())){
+                        Intent newActivity = new Intent(getApplicationContext(), ProjectActivity.class);
+                        newActivity.putExtra("groupID",value);
+                        startActivity(newActivity);
                     }
                 }
             }
@@ -44,6 +44,7 @@ public class HasAuthActivity extends AppCompatActivity {
 
             }
         });
+
         Intent newActvity = new Intent(getApplicationContext(), ProjectNoPermissionActivity.class); //change this
         newActvity.putExtra("groupID",value);
         startActivity(newActvity);

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -169,6 +170,15 @@ public class CreateGroupActivity extends AppCompatActivity {
 
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 //                        LocalDate groupFormDeadline = LocalDate.parse(groupFormDeadlineString, formatter);
+
+                        // checks if project name or course are empty/null, then sets a default one
+                        if (TextUtils.isEmpty(projectName)) {
+                            projectName = "project name";
+                        }
+
+                        if (TextUtils.isEmpty(course)) {
+                            course = "course";
+                        }
 
                         // checks to make sure date is in the correct format
                         try {

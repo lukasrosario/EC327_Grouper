@@ -34,7 +34,7 @@ public class projectGroup {
     public LocalDate projectDeadline;
 //    public LocalDate formGroupDeadline;
     public String descript; //description is a keyword
-    public List<String> members = new ArrayList<String>();
+    public Map<String, Boolean> members = new HashMap<>();
 
     public projectGroup() {
         // Default constructor required for calls to DataSnapshot.getValue(Comment.class)
@@ -53,13 +53,13 @@ public class projectGroup {
 
     public void addMember (String uid) {
         if (currentNumMembers != maxCapacity) {
-            members.add(uid);
+            members.put(uid, true);
             currentNumMembers++;
         }
     }
 
     public void removeMember (String uid) {
-        if (members.contains(uid)) {
+        if (members.containsKey(uid)) {
             members.remove(uid);
             currentNumMembers--;
         }

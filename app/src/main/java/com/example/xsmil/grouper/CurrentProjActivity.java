@@ -6,8 +6,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +19,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseIndexArray;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -22,15 +29,25 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.security.acl.Group;
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import models.groupHolder;
 import models.projectGroup;
 import models.user;
 
 public class CurrentProjActivity extends AppCompatActivity {
+
+    @NonNull
+    protected static final Query sGroupsQuery = FirebaseDatabase.getInstance().getReference().child("projectGroups");
+
+    @BindView(R.id.groupsList)
+    RecyclerView mRecyclerView;
 
     private Button creategroupbutton;
     private Button backButton;
@@ -39,6 +56,8 @@ public class CurrentProjActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+
+    private DatabaseReference mGroupIndicesRef;
 
     private DatabaseReference dR;
     private ListView listView;
@@ -49,6 +68,18 @@ public class CurrentProjActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_proj);
+        ButterKnife.bind(this);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Opens Create Group Activity.
         creategroupbutton = (Button) findViewById(R.id.CreateGroupBtn);
@@ -68,13 +99,11 @@ public class CurrentProjActivity extends AppCompatActivity {
         });
 
         // If the user is not signed in, it opens LoginActivity.
-        firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() == null) {
             startActivity(new Intent(this, LoginActivity.class));
         }
 
         // Displays the user's email in TextView using FireBase Authentication.
-        final FirebaseUser user = firebaseAuth.getCurrentUser();
         textViewUserEmail = (TextView) findViewById(R.id.TextViewUserEmail);
         textViewUserEmail.setText(user.getEmail());
 
@@ -99,6 +128,51 @@ public class CurrentProjActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        attachRecyclerViewAdapter();
+    }
+
+    private void attachRecyclerViewAdapter() {
+        final RecyclerView.Adapter adapter = newAdapter();
+
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                mRecyclerView.smoothScrollToPosition(adapter.getItemCount());
+            }
+        });
+
+        mRecyclerView.setAdapter(adapter);
+    }
+
+    @NonNull
+    protected RecyclerView.Adapter newAdapter() {
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        mGroupIndicesRef = FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("projectGroups");
+
+        FirebaseRecyclerOptions<projectGroup> options =
+                new FirebaseRecyclerOptions.Builder<projectGroup>()
+                        .setIndexedQuery(mGroupIndicesRef, sGroupsQuery.getRef(), projectGroup.class)
+                        .setLifecycleOwner(this)
+                        .build();
+
+        return new FirebaseRecyclerAdapter<projectGroup, groupHolder>(options) {
+            @Override
+            public groupHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                return new groupHolder(LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.group, parent, false));
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull groupHolder holder, int position, @NonNull projectGroup model) {
+                holder.bind(model);
+            }
+        };
+    }
+
     private void openActivityCreateGroup() {
         Intent intent = new Intent(this, CreateGroupActivity.class);
         startActivity(intent);
@@ -109,103 +183,3 @@ public class CurrentProjActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
-
-/*public class CurrentProjActivity extends AppCompatActivity implements View.OnClickListener{
-
-    private Button creategroupbutton;
-    private TextView textViewUserEmail;
-
-
-    private FirebaseAuth firebaseAuth;
-
-    private DatabaseReference databaseReference;
-    private EditText editTextName;
-    private Button buttonSave;
-
-    private TextView textViewUserFull;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_current_proj);
-
-        creategroupbutton = (Button) findViewById(R.id.CreateGroupBtn);
-        creategroupbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openActivityCreateGroup();
-            }
-        });
-
-        firebaseAuth = FirebaseAuth.getInstance();
-
-        if (firebaseAuth.getCurrentUser() == null) {
-            startActivity(new Intent(this, LoginActivity.class));
-        }
-
-        final FirebaseUser user = firebaseAuth.getCurrentUser();
-
-        textViewUserEmail = (TextView) findViewById(R.id.TextViewUserEmail);
-        textViewUserEmail.setText(user.getEmail());
-
-
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-
-        editTextName = (EditText) findViewById(R.id.editTextName);
-        buttonSave = (Button) findViewById(R.id.buttonSave);
-        buttonSave.setOnClickListener(this);
-
-        textViewUserFull = (TextView) findViewById(R.id.textViewUserFull);
-        textViewUserFull.setText("hello");
-
-
-
-
-        databaseReference.child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                UserInformation userInfo = dataSnapshot.getValue(UserInformation.class);
-                System.out.println(userInfo.name);
-                textViewUserFull.setText(userInfo.name);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
-
-
-
-
-
-    }
-
-    private void openActivityCreateGroup() {
-        Intent intent = new Intent(this, CreateGroupActivity.class);
-        startActivity(intent);
-    }
-
-    private void saveUserInformation(){
-        String name = editTextName.getText().toString().trim();
-
-        UserInformation userInformation = new UserInformation(name);
-
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        databaseReference.child("users").child(user.getUid()).setValue(userInformation);
-
-        /*user newUser = new user(user.getUid(), user.getEmail(),
-        databaseReference.child("users").child(user.getUid()).setValue(user);
-         */
-/*
-        Toast.makeText(this,"Information Saved", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (view == buttonSave)
-            saveUserInformation();
-
-    }
-}
-*/

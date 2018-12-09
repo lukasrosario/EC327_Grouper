@@ -17,7 +17,7 @@ public class user {
     public String firstName;
     public String lastName;
     public String email;
-    public List<String> projectGroups = new ArrayList<String>();
+    public Map<String, Boolean> projectGroups = new HashMap<>();
 
     public user() {
         // Default constructor required for calls to DataSnapshot.getValue(Comment.class)
@@ -31,11 +31,13 @@ public class user {
     }
 
     public void addGroup (String groupID) {
-        projectGroups.add(groupID);
+        projectGroups.put(groupID, true);
     }
 
     public void removeGroup (String groupID) {
-        projectGroups.remove(groupID);
+        if(projectGroups.containsKey(groupID)) {
+            projectGroups.remove(groupID);
+        }
     }
 
     @Exclude

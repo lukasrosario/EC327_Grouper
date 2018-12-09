@@ -8,7 +8,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -17,9 +17,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77b09228-dc1d-4133-a69e-6cbf28fe40b5" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/CurrentProjActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/CurrentProjActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/MainIndexActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/MainIndexActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/models/groupHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/models/groupHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/group.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/group.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/models/projectGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/models/projectGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/models/user.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/models/user.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_current_proj.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_current_proj.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -45,59 +59,19 @@
       <file leaf-file-name="CreateGroupActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/CreateGroupActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="249" column="13" selection-start-line="249" selection-start-column="13" selection-end-line="249" selection-end-column="13" />
-              <folding>
-                <element signature="e#1791#1938#0" expanded="true" />
-                <element signature="e#1937#1938#0" expanded="true" />
-                <element signature="e#2175#2528#0" expanded="true" />
-                <element signature="e#2527#2528#0" expanded="true" />
-                <element signature="e#5882#5909#0" expanded="true" />
-                <element signature="e#5985#6211#0" expanded="true" />
-                <element signature="e#6210#6211#0" expanded="true" />
-                <element signature="e#6284#9531#0" expanded="true" />
-                <element signature="e#9530#9531#0" expanded="true" />
-                <element signature="e#10222#10248#0" expanded="true" />
-                <element signature="e#10357#10552#0" expanded="true" />
-                <element signature="e#10551#10552#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="214">
+              <caret line="257" column="42" selection-start-line="257" selection-start-column="42" selection-end-line="257" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RegisterActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/RegisterActivity.java">
+      <file leaf-file-name="MainIndexActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/MainIndexActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2359">
-              <caret line="163" column="62" selection-start-line="163" selection-start-column="62" selection-end-line="163" selection-end-column="62" />
+            <state relative-caret-position="-45">
+              <caret line="24" column="61" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="group.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/group.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="35" column="43" lean-forward="true" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="groupHolder.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/models/groupHolder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2924">
-              <caret line="172" column="3" selection-start-line="172" selection-start-column="3" selection-end-line="172" selection-end-column="3" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2212#2213#0" expanded="true" />
-                <element signature="e#2251#2252#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -106,8 +80,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="33" column="30" lean-forward="true" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
+            <state relative-caret-position="264">
+              <caret line="123" selection-start-line="123" selection-end-line="123" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2058#2217#0" expanded="true" />
@@ -123,37 +97,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainIndexActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/MainIndexActivity.java">
+      <file leaf-file-name="CurrentProjActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/CurrentProjActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="2516">
+              <caret line="153" selection-start-line="153" selection-end-line="153" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2747#2906#0" expanded="true" />
+                <element signature="e#2905#2906#0" expanded="true" />
+                <element signature="e#4801#5045#0" expanded="true" />
+                <element signature="e#5044#5045#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <file leaf-file-name="activity_current_proj.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_current_proj.xml">
           <provider selected="true" editor-type-id="android-designer2">
             <state />
           </provider>
           <provider editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CurrentProjActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/CurrentProjActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-425">
-              <caret line="108" column="30" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
+            <state relative-caret-position="272">
+              <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#782#803#0" expanded="true" />
+                <element signature="e#1248#1262#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -162,10 +132,24 @@
       <file leaf-file-name="projectGroup.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/models/projectGroup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="119" column="5" lean-forward="true" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
+            <state relative-caret-position="70">
+              <caret line="133" column="60" selection-start-line="133" selection-start-column="60" selection-end-line="133" selection-end-column="60" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/models/user.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#843#844#0" expanded="true" />
+                <element signature="e#885#886#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -176,16 +160,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="layoutResourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>projectDeadline</find>
-      <find>save</find>
-      <find>createGroup</find>
       <find>form</find>
       <find>maxCapac</find>
       <find>course</find>
@@ -209,10 +190,13 @@
       <find>onclick</find>
       <find>recyclerview</find>
       <find>groupID</find>
-      <find>sgroupquery</find>
-      <find>projectGroups</find>
       <find>group</find>
       <find>snapshot</find>
+      <find>user</find>
+      <find>sgroupquery</find>
+      <find>projectGroups</find>
+      <find>pos</find>
+      <find>query</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2519,7 +2503,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/createGroup.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/createGroupActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/models/user.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/HomeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/LoginActivity.java" />
@@ -2527,8 +2510,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/actvity_project_profile.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_current_proj.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/CurrentProjActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/ProjectsAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
@@ -2539,18 +2520,22 @@
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/border.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/border.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/MainIndexActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/CreateGroupActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/models/projectGroup.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/RegisterActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/group.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/models/groupHolder.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_current_proj.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/MainIndexActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/CurrentProjIndexActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/CurrentProjActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/models/projectGroup.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/models/user.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="811" />
     <option name="y" value="-18" />
     <option name="width" value="980" />
@@ -2840,7 +2825,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="878" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="6" weight="0.328877" />
@@ -2859,12 +2844,12 @@
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23087248" />
-      <window_info anchor="bottom" id="Build" order="11" sideWeight="0.49932885" visible="true" weight="0.30614972" />
+      <window_info anchor="bottom" id="Build" order="11" sideWeight="0.49932885" weight="0.30481285" />
       <window_info anchor="right" id="Gradle" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="3" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.38368985" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.38368985" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" id="Assistant" order="3" weight="0.24697986" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -2914,17 +2899,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="13" />
+      <option name="time" value="22" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="65" selection-start-line="4" selection-start-column="65" selection-end-line="4" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/models/user.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
@@ -3065,20 +3043,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/models/user.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="37" column="38" selection-start-line="37" selection-start-column="38" selection-end-line="37" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#843#844#0" expanded="true" />
-            <element signature="e#885#886#0" expanded="true" />
-            <element signature="e#933#934#0" expanded="true" />
-            <element signature="e#978#979#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-tasks-16.0.1.aar/fc1a8bf274bd0e87e17fa463cb46da51/jars/classes.jar!/com/google/android/gms/tasks/zzj.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -3184,19 +3148,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_current_proj.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
-          <folding>
-            <element signature="e#901#915#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/actvity_project_profile.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider editor-type-id="android-manifest">
@@ -3237,16 +3188,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/CurrentProjActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-425">
-          <caret line="108" column="30" selection-start-line="108" selection-start-column="30" selection-end-line="108" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -3261,54 +3202,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/models/projectGroup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="119" column="5" lean-forward="true" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/MainIndexActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="33" column="30" lean-forward="true" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2058#2217#0" expanded="true" />
-            <element signature="e#2216#2217#0" expanded="true" />
-            <element signature="e#2341#2500#0" expanded="true" />
-            <element signature="e#2499#2500#0" expanded="true" />
-            <element signature="e#2606#2898#0" expanded="true" />
-            <element signature="e#2897#2898#0" expanded="true" />
-            <element signature="e#2835#3079#0" expanded="true" />
-            <element signature="e#3078#3079#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3332,27 +3225,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/CreateGroupActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="249" column="13" selection-start-line="249" selection-start-column="13" selection-end-line="249" selection-end-column="13" />
-          <folding>
-            <element signature="e#1791#1938#0" expanded="true" />
-            <element signature="e#1937#1938#0" expanded="true" />
-            <element signature="e#2175#2528#0" expanded="true" />
-            <element signature="e#2527#2528#0" expanded="true" />
-            <element signature="e#5882#5909#0" expanded="true" />
-            <element signature="e#5985#6211#0" expanded="true" />
-            <element signature="e#6210#6211#0" expanded="true" />
-            <element signature="e#6284#9531#0" expanded="true" />
-            <element signature="e#9530#9531#0" expanded="true" />
-            <element signature="e#10222#10248#0" expanded="true" />
-            <element signature="e#10357#10552#0" expanded="true" />
-            <element signature="e#10551#10552#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/group.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3363,14 +3235,117 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="43" selection-start-line="43" selection-end-line="60" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/models/groupHolder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2924">
-          <caret line="172" column="3" selection-start-line="172" selection-start-column="3" selection-end-line="172" selection-end-column="3" />
+        <state relative-caret-position="-497">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2212#2213#0" expanded="true" />
-            <element signature="e#2251#2252#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/CurrentProjIndexActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="32" column="72" lean-forward="true" selection-end-line="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="123" selection-start-line="123" selection-end-line="123" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2058#2217#0" expanded="true" />
+            <element signature="e#2216#2217#0" expanded="true" />
+            <element signature="e#2341#2500#0" expanded="true" />
+            <element signature="e#2499#2500#0" expanded="true" />
+            <element signature="e#2606#2898#0" expanded="true" />
+            <element signature="e#2897#2898#0" expanded="true" />
+            <element signature="e#2835#3079#0" expanded="true" />
+            <element signature="e#3078#3079#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/CreateGroupActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="257" column="42" selection-start-line="257" selection-start-column="42" selection-end-line="257" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/MainIndexActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-45">
+          <caret line="24" column="61" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xsmil/grouper/CurrentProjActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2516">
+          <caret line="153" selection-start-line="153" selection-end-line="153" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2747#2906#0" expanded="true" />
+            <element signature="e#2905#2906#0" expanded="true" />
+            <element signature="e#4801#5045#0" expanded="true" />
+            <element signature="e#5044#5045#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_current_proj.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
+          <folding>
+            <element signature="e#782#803#0" expanded="true" />
+            <element signature="e#1248#1262#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/models/projectGroup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="133" column="60" selection-start-line="133" selection-start-column="60" selection-end-line="133" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/models/user.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#843#844#0" expanded="true" />
+            <element signature="e#885#886#0" expanded="true" />
           </folding>
         </state>
       </provider>

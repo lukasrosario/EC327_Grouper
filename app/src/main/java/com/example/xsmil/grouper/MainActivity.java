@@ -10,11 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.firebase.ui.auth.util.ui.ImeHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -22,14 +20,13 @@ import com.google.firebase.database.Query;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import models.groupHolder;
 import models.projectGroup;
 
 public class MainActivity extends AppCompatActivity {
 
     @NonNull
-    protected static final Query sGroupQuery = FirebaseDatabase.getInstance().getReference().child("projectGroups").limitToLast(50);
+    protected static final Query sGroupQuery = FirebaseDatabase.getInstance().getReference().child("projectGroups").orderByChild("projectDeadline").limitToLast(50);
 
     @BindView(R.id.groupsList)
     RecyclerView mRecyclerView;
@@ -50,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(true);
 
-        mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         firebaseAuth = FirebaseAuth.getInstance();

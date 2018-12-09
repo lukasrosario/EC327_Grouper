@@ -171,8 +171,12 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     projectGroup Project = dataSnapshot.getValue(projectGroup.class);
                     Project.removeMember(currentUser);
+
                     Map<String, Object> updatedGroupValues = Project.toMap();
                     databaseReference.updateChildren(updatedGroupValues);
+
+                    // update groups under user id in database
+                    removeGroupFromUserInDB(Project.groupID);
                 }
 
                 @Override
@@ -188,5 +192,31 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
         }
     }
+
+    public void removeGroupFromUserInDB(String groupID) {
+
+        final String currentUid = mAuth.getCurrentUser().getUid();
+        final String groupIDFinal = groupID;
+
+        databaseReferenceUsers.child(currentUid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                user currentUser = dataSnapshot.getValue(user.class);
+                currentUser.removeGroup(groupIDFinal);
+
+                Map<String, Object> updatedUserValues = currentUser.toMap();
+                databaseReferenceUsers.child(currentUid).setValue(updatedUserValues);
+
+                DatabaseReference projGroupMembersRef = FirebaseDatabase.getInstance().getReference().child("projGroupMembers");
+                projGroupMembersRef.child(groupIDFinal).child(currentUid).setValue(updatedUserValues);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("Cancel: ", "onCancelled", databaseError.toException());
+            }
+        });
+    }
+
 }
+
 

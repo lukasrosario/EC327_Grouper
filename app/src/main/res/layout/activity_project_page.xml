@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProjectNoPermissionActivity">
+    tools:context=".ProjectActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -87,16 +87,21 @@
         android:text="Description"
         />
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/lView"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_below="@id/etDescription"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="67dp"
-        android:layout_marginEnd="4dp"
-        android:layout_alignParentStart="true"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_marginTop="250dp"
+        android:clipToPadding="false"
         android:layout_alignParentBottom="true"
-        android:scrollbars="vertical" />
+        android:layout_alignParentLeft="true"
+        android:padding="16dp"
+        android:scrollbars="vertical"
+        android:elevation="10dp"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:reverseLayout="true"
+        app:stackFromEnd="true"
+        tools:listitem="@layout/user_layout" />
 
 </RelativeLayout>

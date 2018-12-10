@@ -16,13 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".CreateGroupActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".CurrentProjActivity"></activity>
-        <activity android:name=".HasAuthActivity"></activity>
-        <activity android:name=".ProjectActivity"></activity>
-        <activity android:name=".ProjectNoPermissionActivity"></activity>
+        <activity android:name=".RegisterActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".CreateGroupActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".MainActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".CurrentProjActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".HasAuthActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".ProjectActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".ProjectNoPermissionActivity" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

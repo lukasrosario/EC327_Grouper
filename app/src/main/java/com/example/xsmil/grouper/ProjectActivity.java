@@ -3,30 +3,34 @@ package com.example.xsmil.grouper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.widget.ListViewAutoScrollHelper;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.example.xsmil.grouper.UserList;
+
+import butterknife.BindView;
+import models.UserList;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import models.groupHolder;
 import models.projectGroup;
 import models.user;
 
@@ -47,6 +51,14 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
     private String currentUser;
     ListView listView;
 
+    @BindView(R.id.userLayout)
+    RecyclerView mRecyclerView;
+
+    DatabaseReference mMemberIDsRef;
+
+    @NonNull
+    protected static final Query sUsersQuery = FirebaseDatabase.getInstance().getReference().child("users");
+
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_page);
@@ -61,7 +73,6 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
         leave.setOnClickListener(this);
         back.setOnClickListener(this);
 
-        listView = (ListView) findViewById(R.id.lView);
         val = getIntent().getStringExtra("groupID").toString();
         databaseReference = FirebaseDatabase.getInstance().getReference("projectGroups").child(val);
         databaseReferencemembers = FirebaseDatabase.getInstance().getReference("projectGroups").child(val).child("members");
@@ -75,13 +86,107 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 
         currentUser = mAuth.getUid().trim();
 
+        mRecyclerView = (RecyclerView) findViewById(R.id.lView);
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        attachRecyclerViewAdapter();
 
-        databaseReferencemembers.addValueEventListener(new ValueEventListener() {
+        databaseReference.child("projectTitle").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String name  = dataSnapshot.getValue(String.class);
+                projectName.setText(name);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        databaseReference.child("projectDeadline").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                deadline.setText(dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        databaseReference.child("course").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Class.setText(dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        databaseReference.child("description").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                description.setText(dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void attachRecyclerViewAdapter() {
+        final RecyclerView.Adapter adapter = newAdapter();
+
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                mRecyclerView.smoothScrollToPosition(adapter.getItemCount());
+            }
+        });
+
+        mRecyclerView.setAdapter(adapter);
+    }
+
+    @NonNull
+    protected RecyclerView.Adapter newAdapter() {
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        mMemberIDsRef = FirebaseDatabase.getInstance().getReference().child("projectGroups").child(val).child("members");
+
+        FirebaseRecyclerOptions<user> options =
+                new FirebaseRecyclerOptions.Builder<user>()
+                        .setIndexedQuery(mMemberIDsRef, sUsersQuery.getRef(), user.class)
+                        .setLifecycleOwner(this)
+                        .build();
+
+        return new FirebaseRecyclerAdapter<user, UserList>(options) {
+            @Override
+            public UserList onCreateViewHolder(ViewGroup parent, int viewType) {
+                return new UserList(LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.user_layout, parent, false));
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull UserList holder, int position, @NonNull user model) {
+                holder.bind(model);
+            }
+        };
+    }
+
+/*    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseDatabase.getInstance().getReference("projectGroups").child(val).child("members").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userList.clear();
@@ -90,6 +195,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
                     String userId = userSnapshot.getKey().toString();
                     userID.add(userId);
                 }
+
                 databaseReferenceUsers.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -138,7 +244,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        databaseReference.child("course").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("course").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Class.setText(dataSnapshot.getValue(String.class));
@@ -149,7 +255,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 
             }
         });
-        databaseReference.child("description").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("description").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 description.setText(dataSnapshot.getValue(String.class));
@@ -160,7 +266,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 
             }
         });
-    }
+    }*/
 
 
     //@Override

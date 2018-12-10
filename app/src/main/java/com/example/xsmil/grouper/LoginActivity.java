@@ -36,8 +36,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        // If the user is already signed in, it will directly open the MainActivity page.
         if (firebaseAuth.getCurrentUser() != null){
-            // profile activity here.
             finish();
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
         }
@@ -54,37 +54,39 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void userLogin(){
+        //Retrieves email and password as strings from the 2 editTexts that the user entered.
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
+        // If the user tries to sign in with the email editText empty, it will display an error message.
         if(TextUtils.isEmpty(email)){
-            //email is empty
             Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        // If the user tries to sign in with the password editText empty, it will display an error message.
         if(TextUtils.isEmpty((password))){
-            //password is empty
             Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        progressDialog.setMessage("Logging in...");
+        progressDialog.setMessage("Signing in...");
         progressDialog.show();
 
+        // Signs in user by using FireBase function.
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
 
+                        // Closes current activity and starts MainActivity if the login is successful.
                         if(task.isSuccessful()){
-                            // start profile activity.
                             finish();
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }
+                        // Displays error message is the login is not successful.
                         else {
-                            Toast toast = Toast.makeText(getApplicationContext(),"Login Failed", Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(getApplicationContext(),"Sign in Failed", Toast.LENGTH_SHORT);
                             toast.show();
                         }
 
@@ -99,6 +101,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (view == buttonSignIn){
             userLogin();
         }
+        // Switches to register page.
         if (view == textViewSignup){
             finish();
             startActivity(new Intent(this,RegisterActivity.class));

@@ -70,6 +70,7 @@ public class CurrentProjActivity extends AppCompatActivity {
         setContentView(R.layout.activity_current_proj);
         ButterKnife.bind(this);
 
+        // Gets instance from FireBase Authentication in order store user.
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseAuth.getCurrentUser();
 
@@ -107,9 +108,10 @@ public class CurrentProjActivity extends AppCompatActivity {
         textViewUserEmail = (TextView) findViewById(R.id.TextViewUserEmail);
         textViewUserEmail.setText(user.getEmail());
 
-        textViewUserFull = (TextView) findViewById(R.id.textViewUserFull);
         // Retrieves first and last name from user class in FireBase Database
+        // References child node by passing unique user id.
         // Concatenates the first and last name and sets the textView to display the Full Name.
+        textViewUserFull = (TextView) findViewById(R.id.textViewUserFull);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override

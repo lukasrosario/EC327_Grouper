@@ -59,9 +59,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         db = FirebaseDatabase.getInstance().getReference();
         userRef = db.child("users");
 
-
+        // Goes to MainActivity if user is already logged in.
         if (firebaseAuth.getCurrentUser() != null){
-            // profile activity here.
             finish();
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
         }
@@ -119,12 +118,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String firstName = editTextFirstName.getText().toString().trim();
         String lastName = editTextLastName.getText().toString().trim();
 
+        // If the user tries to register with the email editText empty, it will display an error message.
         if(TextUtils.isEmpty(email)){
-            //email is empty
             Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        // If the user tries to register with the password editText empty, it will display an error message.
         if(TextUtils.isEmpty((password))){
             //password is empty
             Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
@@ -134,18 +133,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         progressDialog.setMessage("Registering User...");
         progressDialog.show();
 
+        // Registers user to FireBase and adds user to users node in our real-time database.
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        // Adds user information users node in real-time database if registration is successful.
+                        // Displays confirmation message on screen and opens MainActivity.
                         if(task.isSuccessful()) {
                             addUserToDB(firebaseAuth.getCurrentUser().getUid());
                             Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                             finish();
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }
+                        // error message if registration failed.
                         else {
-                            Toast.makeText(RegisterActivity.this, "Could not Register", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                         }
 

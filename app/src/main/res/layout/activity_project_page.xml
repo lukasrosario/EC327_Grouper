@@ -12,7 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="#3D315B"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <Button
         android:id="@+id/btLeave"
@@ -20,13 +20,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:text="Leave"
-        android:textColor="#ffffff"
-        android:layout_marginEnd="4dp"
         android:layout_marginTop="5dp"
-        android:drawableTop="@drawable/leave_group_icon"
+        android:layout_marginEnd="4dp"
         android:background="@drawable/backbutton"
-        />
+        android:drawableTop="@drawable/leave_group_icon"
+        android:text="Leave"
+        android:textColor="#ffffff" />
 
     <Button
         android:id="@+id/btBack"
@@ -36,67 +35,102 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="4dp"
         android:layout_marginTop="5dp"
-        android:textColor="#ffffff"
+        android:background="@drawable/backbutton"
         android:drawableTop="@drawable/backwards_icon"
         android:text="Back"
-        android:background="@drawable/backbutton"
-        />
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/projLabel"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Project Name: "
+        android:layout_marginStart="8dp"
+        android:textSize="24sp"
+        android:textColor="@color/textColor"
+        android:layout_below="@id/my_toolbar"/>
 
     <TextView
         android:id="@+id/etProjectName"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/my_toolbar"
-        android:layout_alignParentStart="true"
+        android:layout_marginTop="24dp"
+        android:layout_toRightOf="@id/projLabel"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="12dp"
-        android:text="PrjectName"
-        />
+        android:textColor="@color/textColor"
+        android:textSize="20sp"
+        android:text="PrjectName" />
+
+    <TextView
+        android:id="@+id/courseLabel"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_width="wrap_content"
+        android:text="Course: "
+        android:layout_marginTop="20dp"
+        android:textSize="24sp"
+        android:textColor="@color/textColor"
+        android:layout_below="@id/projLabel"/>
 
     <TextView
         android:id="@+id/etCourse"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_alignParentStart="true"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginTop="26dp"
+        android:textColor="@color/textColor"
         android:layout_below="@id/etProjectName"
+        android:layout_toRightOf="@id/courseLabel"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:text="Course Name"
-        />
+        android:text="Course Name" />
+
+    <TextView
+        android:id="@+id/deadlineLabel"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Deadline: "
+        android:textSize="24sp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/textColor"
+        android:layout_below="@id/courseLabel"/>
 
     <TextView
         android:id="@+id/etDeadline"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_alignParentStart="true"
+        android:layout_height="wrap_content"
         android:layout_below="@id/etCourse"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:text="Deadline"
-        />
+        android:textColor="@color/textColor"
+        android:textSize="20sp"
+        android:layout_toRightOf="@id/deadlineLabel"
+        android:layout_marginTop="26dp"
+        android:text="Deadline" />
 
     <TextView
         android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@id/etDeadline"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
+        android:textSize="20sp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginTop="5dp"
-        android:text="Description"
-        />
+        android:textColor="@color/textColor"
+        android:text="Description" />
 
     <ListView
         android:id="@+id/lView"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_below="@id/etDescription"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="67dp"
-        android:layout_marginEnd="4dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="4dp"
         android:scrollbars="vertical" />
 
 </RelativeLayout>

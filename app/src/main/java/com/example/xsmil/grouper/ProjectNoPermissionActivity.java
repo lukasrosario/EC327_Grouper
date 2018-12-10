@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.ListViewAutoScrollHelper;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Map;
 
 import models.projectGroup;
+import models.user;
 
 public class ProjectNoPermissionActivity extends AppCompatActivity implements View.OnClickListener {
     DatabaseReference databaseReference;
@@ -120,6 +122,9 @@ public class ProjectNoPermissionActivity extends AppCompatActivity implements Vi
                         Project.addMember(currentUser);
                         Map<String, Object> updatedGroupValues = Project.toMap();
                         databaseReference.updateChildren(updatedGroupValues);
+
+                        // update groups under user id in database
+                        addGroupToUserInDB(Project.groupID);
                     }
                 }
                 @Override
@@ -133,6 +138,32 @@ public class ProjectNoPermissionActivity extends AppCompatActivity implements Vi
         if (view == back){
             startActivity(new Intent(this,MainActivity.class));
         }
+    }
+
+    public void addGroupToUserInDB(String groupID) {
+
+        final String currentUid = mAuth.getCurrentUser().getUid();
+        final String groupIDFinal = groupID;
+
+        final DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users");
+
+        userRef.child(currentUid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                user currentUser = dataSnapshot.getValue(user.class);
+                currentUser.addGroup(groupIDFinal);
+
+                Map<String, Object> updatedUserValues = currentUser.toMap();
+                userRef.child(currentUid).setValue(updatedUserValues);
+
+                DatabaseReference projGroupMembersRef = FirebaseDatabase.getInstance().getReference().child("projGroupMembers");
+                projGroupMembersRef.child(groupIDFinal).child(currentUid).setValue(updatedUserValues);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("Cancel: ", "onCancelled", databaseError.toException());
+            }
+        });
     }
 }
 

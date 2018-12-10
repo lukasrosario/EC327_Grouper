@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateGroupActivity">
+
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@color/fui_transparent"
+        android:elevation="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#FFFFFF"
+        android:text="@string/back"
+        app:layout_constraintTop_toTopOf="parent"
+        android:drawableTop="@drawable/backwards_icon"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:text="Create Group"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_back"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="80dp"
+        android:textSize="24sp"
+        android:elevation="1dp"/>
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/theToolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"/>
+
+
+    <EditText
+        android:id="@+id/proj_name"
+        android:layout_width="367dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="28dp"
+        android:hint="@string/project_name"
+        app:layout_constraintTop_toBottomOf="@+id/etCourse"
+        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="text" />
+
+
+    <EditText
+        android:id="@+id/etCourse"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="8dp"
+        android:hint="@string/course"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/theToolbar"
+        android:inputType="text" />
+
+
+    <EditText
+        android:id="@+id/etTeamName"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:hint="@string/team_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/proj_name"
+        app:layout_constraintVertical_bias="0.0"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/proj_deadline_input"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_width="186dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="date"
+        android:text="@string/project_deadline_input"
+        android:textAlignment="textEnd"
+        app:layout_constraintStart_toEndOf="@+id/etDeadline"
+        app:layout_constraintTop_toBottomOf="@+id/etTeamName"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="371dp"
+        android:layout_height="90dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:hint="@string/project_description"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/max_capacity"/>
+
+    <Button
+        android:id="@+id/btn_create"
+        android:background="@drawable/button_round"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"/>
+
+    <Button
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:clickable="false"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ic_plus_sign"
+        android:elevation="4dp"
+        app:layout_constraintStart_toStartOf="@id/btn_create"
+        app:layout_constraintTop_toTopOf="@id/btn_create" />
+
+    <EditText
+        android:id="@+id/max_capacity_input"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_width="182dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="@string/maxCapacityInput"
+        android:textAlignment="textEnd"
+        app:layout_constraintStart_toEndOf="@id/max_capacity"
+        app:layout_constraintTop_toBottomOf="@+id/proj_deadline_input" />
+
+    <TextView
+        android:id="@+id/etDeadline"
+        android:layout_width="177dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/project_deadline"
+        android:textAlignment="center"
+        android:textColor="#808080"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etTeamName"/>
+
+    <TextView
+        android:id="@+id/max_capacity"
+        android:layout_width="176dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/maxCapacity"
+        android:textAlignment="center"
+        android:textColor="#808080"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etDeadline"/>
+
+</android.support.constraint.ConstraintLayout>

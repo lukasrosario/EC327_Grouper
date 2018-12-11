@@ -32,7 +32,8 @@ public class projectGroup {
     public String teamName;
     public String projectTitle;
     public LocalDate projectDeadline;
-//    public LocalDate formGroupDeadline;
+    public String admin;
+    //    public LocalDate formGroupDeadline;
     public String descript; //description is a keyword
     public Map<String, Boolean> members = new HashMap<>();
 
@@ -40,7 +41,7 @@ public class projectGroup {
         // Default constructor required for calls to DataSnapshot.getValue(Comment.class)
     }
 
-    public projectGroup (String course, String teamName, String projectTitle, LocalDate projectDeadline, String descript, int maxCapacity) {
+    public projectGroup (String course, String teamName, String projectTitle, LocalDate projectDeadline, String descript, int maxCapacity, String admin) {
         this.course = course;
         this.teamName = teamName;
         this.projectTitle = projectTitle;
@@ -48,6 +49,7 @@ public class projectGroup {
 //        this.formGroupDeadline = formGroupDeadline;
         this.descript = descript;
         this.maxCapacity = maxCapacity;
+        this.admin = admin;
         currentNumMembers = 0;
     }
 
@@ -79,13 +81,12 @@ public class projectGroup {
 
 
     // defining a destructor for the projectGroup class
-    // this needs to be tested but cannot until the project display page is created
-    public void removeGroup () {
+    public void removeGroup() {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         DatabaseReference projGroupReference = db.child("projectGroups");
         DatabaseReference projGroupMembersRef = db.child("projGroupMembers");
         projGroupReference.child(this.groupID).setValue(null); // removes projectGroup from projectGroup node in DB
-        projGroupMembersRef.child(groupID).setValue(null); // removes projectGroup from projGroupMembers node in DB
+        projGroupMembersRef.child(this.groupID).setValue(null); // removes projectGroup from projGroupMembers node in DB
 
         final DatabaseReference userReference = db.child("users");
         final String groupID = this.groupID;
@@ -159,6 +160,7 @@ public class projectGroup {
         result.put("members", members);
         result.put("maxCapacity", maxCapacity);
         result.put("currentNumMembers", currentNumMembers);
+        result.put("admin",admin);
 
         return result;
     }

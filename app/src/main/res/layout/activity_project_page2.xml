@@ -107,8 +107,19 @@
             android:textColor="@color/textColor"
             android:textSize="20sp"
             android:layout_toRightOf="@id/deadlineLabel"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="25dp"
             android:text="Deadline" />
+
+        <TextView
+        android:id="@+id/descriptionLabel"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Description: "
+        android:textSize="24sp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/textColor"
+        android:layout_below="@id/deadlineLabel"/>
 
         <TextView
             android:id="@+id/etDescription"
@@ -117,21 +128,10 @@
             android:layout_below="@id/etDeadline"
             android:layout_marginStart="8dp"
             android:textSize="20sp"
-            android:layout_marginTop="24dp"
+            android:layout_toRightOf="@id/descriptionLabel"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="4dp"
             android:textColor="@color/textColor"
             android:text="Description" />
-
-        <ListView
-            android:id="@+id/lView"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_below="@id/etDescription"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="4dp"
-            android:scrollbars="vertical" />
 
 </RelativeLayout>

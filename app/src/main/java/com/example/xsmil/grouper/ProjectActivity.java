@@ -1,10 +1,13 @@
 package com.example.xsmil.grouper;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -26,6 +30,9 @@ import com.google.firebase.database.ValueEventListener;
 import butterknife.BindView;
 import models.UserList;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +51,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
     private TextView description;
     private Button leave;
     private Button back;
+    private Button remove;
     private String val;
     private FirebaseAuth mAuth;
     private List<user> userList;
@@ -70,8 +78,10 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 
         leave = (Button) findViewById(R.id.btLeave);
         back = (Button) findViewById(R.id.btBack);
+        remove = (Button) findViewById(R.id.btRemove);
         leave.setOnClickListener(this);
         back.setOnClickListener(this);
+        remove.setOnClickListener(this);
 
         val = getIntent().getStringExtra("groupID").toString();
         databaseReference = FirebaseDatabase.getInstance().getReference("projectGroups").child(val);
@@ -88,6 +98,24 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 
         mRecyclerView = (RecyclerView) findViewById(R.id.lView);
 
+        isUserAdmin();
+
+    }
+
+    private void isUserAdmin(){
+        databaseReference.child("admin").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!currentUser.equals(dataSnapshot.getValue().toString())){
+                    remove.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -294,8 +322,43 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
             newActivity.putExtra("groupID",val);
             startActivity(newActivity);
         }
+
         if (view == back){
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        }
+
+        if(view == remove){
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setMessage(R.string.deleteGroupAlert);
+
+            alertDialogBuilder
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // does nothing
+                        }
+                    })
+                    .setPositiveButton("OK",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int which) {
+                            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    projectGroup Project = dataSnapshot.getValue(projectGroup.class);
+                                    Project.removeGroup();
+                                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
+                            confirmationAlert();
+                        }
+                    }).create()
+                    .show();
         }
     }
 
@@ -323,6 +386,20 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
         });
     }
 
-}
+    public void confirmationAlert() {
+        // Dialog pops up to allow user to confirm group has been successfully created
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(R.string.deleteGroupConfirm);
 
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("OK",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+                        // does nothing
+                    }
+                }).create()
+                .show();
+    }
+
+}
 

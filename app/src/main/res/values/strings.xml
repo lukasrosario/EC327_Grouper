@@ -24,5 +24,6 @@
     <string name="logout">Logout</string>
     <string name="current_projects">Current Projects</string>
     <string name="createGroup">Create Group</string>
-    <string name="deleteGroupAlert">Project Group has been deleted.</string>
+    <string name="deleteGroupAlert">Are you sure you want to delete this project group?</string>
+    <string name="deleteGroupConfirm">Project Group has been deleted.</string>
 </resources>

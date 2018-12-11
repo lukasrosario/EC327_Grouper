@@ -92,6 +92,7 @@ public class CreateGroupActivity extends AppCompatActivity {
                 System.out.println("Description: " + newProjGroup.descript);
                 System.out.println("Members: " + newProjGroup.members);
                 System.out.println("Max Capacity: " + newProjGroup.maxCapacity);
+                System.out.println("Admin: " + newProjGroup.admin);
                 Log.d("Added","new project group with groupID: " + groupID);
             }
 
@@ -147,6 +148,7 @@ public class CreateGroupActivity extends AppCompatActivity {
         final EditText descriptionInput = (EditText) findViewById(R.id.etDescription);
         final EditText maxCapacityInput = (EditText) findViewById(R.id.max_capacity_input);
 
+
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage(R.string.createProjectGroup);
 
@@ -200,7 +202,7 @@ public class CreateGroupActivity extends AppCompatActivity {
 
                         String currentUid = firebaseAuth.getCurrentUser().getUid();
 
-                        projectGroup projGroup = new projectGroup(course, teamName, projectName, LocalDate.parse(projectDeadlineString, formatter), description, Integer.parseInt(maxCapacity));
+                        projectGroup projGroup = new projectGroup(course, teamName, projectName, LocalDate.parse(projectDeadlineString, formatter), description, Integer.parseInt(maxCapacity),currentUid);
                         projGroup.setGroupID(groupID);
                         projGroup.addMember(currentUid);
                         Map<String, Object> projectGroupValues = projGroup.toMap();

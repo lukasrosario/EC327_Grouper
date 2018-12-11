@@ -28,6 +28,18 @@
         android:textColor="#ffffff" />
 
     <Button
+        android:id="@+id/btRemove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="-3dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/backbutton"
+        android:text="Delete Group"
+        android:textColor="#ffffff"/>
+
+    <Button
         android:id="@+id/btBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/my_toolbar"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="22dp"
         android:layout_toRightOf="@id/projLabel"
         android:layout_marginStart="5dp"
         android:textColor="@color/textColor"
@@ -106,8 +118,19 @@
         android:textColor="@color/textColor"
         android:textSize="20sp"
         android:layout_toRightOf="@id/deadlineLabel"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="25dp"
         android:text="Deadline" />
+
+    <TextView
+        android:id="@+id/descriptionLabel"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Description: "
+        android:textSize="24sp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/textColor"
+        android:layout_below="@id/deadlineLabel"/>
 
     <TextView
         android:id="@+id/etDescription"
@@ -116,17 +139,29 @@
         android:layout_below="@id/etDeadline"
         android:layout_marginStart="8dp"
         android:textSize="20sp"
-        android:layout_marginTop="24dp"
+        android:layout_toRightOf="@id/descriptionLabel"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="4dp"
         android:textColor="@color/textColor"
         android:text="Description" />
+
+    <TextView
+        android:id="@+id/membersLabel"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Members: "
+        android:textSize="24sp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/textColor"
+        android:layout_below="@id/descriptionLabel"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/lView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/my_toolbar"
-        android:layout_marginTop="250dp"
+        android:layout_below="@+id/membersLabel"
+        android:layout_marginTop="0dp"
         android:clipToPadding="false"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -137,6 +172,5 @@
         app:reverseLayout="true"
         app:stackFromEnd="true"
         tools:listitem="@layout/user_layout" />
-
 
 </RelativeLayout>

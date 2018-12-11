@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProjectActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#3D315B"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <Button
+        android:id="@+id/btLeave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/backbutton"
+        android:drawableTop="@drawable/leave_group_icon"
+        android:text="Leave"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/btBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/backbutton"
+        android:drawableTop="@drawable/backwards_icon"
+        android:text="Back"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/projLabel"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Project Name: "
+        android:layout_marginStart="8dp"
+        android:textSize="24sp"
+        android:textColor="@color/textColor"
+        android:layout_below="@id/my_toolbar"/>
+
+    <TextView
+        android:id="@+id/etProjectName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/my_toolbar"
+        android:layout_marginTop="24dp"
+        android:layout_toRightOf="@id/projLabel"
+        android:layout_marginStart="5dp"
+        android:textColor="@color/textColor"
+        android:textSize="20sp"
+        android:text="PrjectName" />
+
+    <TextView
+        android:id="@+id/courseLabel"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_width="wrap_content"
+        android:text="Course: "
+        android:layout_marginTop="20dp"
+        android:textSize="24sp"
+        android:textColor="@color/textColor"
+        android:layout_below="@id/projLabel"/>
+
+    <TextView
+        android:id="@+id/etCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginTop="26dp"
+        android:textColor="@color/textColor"
+        android:layout_below="@id/etProjectName"
+        android:layout_toRightOf="@id/courseLabel"
+        android:layout_marginStart="5dp"
+        android:text="Course Name" />
+
+    <TextView
+        android:id="@+id/deadlineLabel"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Deadline: "
+        android:textSize="24sp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/textColor"
+        android:layout_below="@id/courseLabel"/>
+
+    <TextView
+        android:id="@+id/etDeadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etCourse"
+        android:layout_marginStart="5dp"
+        android:textColor="@color/textColor"
+        android:textSize="20sp"
+        android:layout_toRightOf="@id/deadlineLabel"
+        android:layout_marginTop="26dp"
+        android:text="Deadline" />
+
+    <TextView
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etDeadline"
+        android:layout_marginStart="8dp"
+        android:textSize="20sp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="4dp"
+        android:textColor="@color/textColor"
+        android:text="Description" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/lView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_marginTop="250dp"
+        android:clipToPadding="false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:padding="16dp"
+        android:scrollbars="vertical"
+        android:elevation="10dp"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:reverseLayout="true"
+        app:stackFromEnd="true"
+        tools:listitem="@layout/user_layout" />
+
+    <Button
+        android:id="@+id/btRemove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-3dp"
+        android:layout_marginTop="141dp"
+        android:layout_toEndOf="@+id/etProjectName"
+        android:text="Delete Group" />
+
+
+</RelativeLayout>

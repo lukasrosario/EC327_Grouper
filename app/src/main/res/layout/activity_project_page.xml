@@ -71,7 +71,7 @@
         android:layout_marginTop="22dp"
         android:layout_toRightOf="@id/projLabel"
         android:layout_marginStart="5dp"
-        android:textColor="@color/textColor"
+        android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         android:text="PrjectName" />
 
@@ -92,7 +92,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:layout_marginTop="26dp"
-        android:textColor="@color/textColor"
+        android:textColor="@color/colorPrimary"
         android:layout_below="@id/etProjectName"
         android:layout_toRightOf="@id/courseLabel"
         android:layout_marginStart="5dp"
@@ -115,7 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/etCourse"
         android:layout_marginStart="5dp"
-        android:textColor="@color/textColor"
+        android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         android:layout_toRightOf="@id/deadlineLabel"
         android:layout_marginTop="25dp"
@@ -142,7 +142,7 @@
         android:layout_toRightOf="@id/descriptionLabel"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="4dp"
-        android:textColor="@color/textColor"
+        android:textColor="@color/colorPrimary"
         android:text="Description" />
 
     <TextView
@@ -150,7 +150,8 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Members: "
+        android:text="Team Info"
+        android:layout_centerHorizontal="true"
         android:textSize="24sp"
         android:layout_marginTop="20dp"
         android:textColor="@color/textColor"
@@ -164,7 +165,6 @@
         android:layout_marginTop="0dp"
         android:clipToPadding="false"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:padding="16dp"
         android:scrollbars="vertical"
         android:elevation="10dp"

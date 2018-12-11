@@ -60,7 +60,7 @@
             android:layout_marginTop="22dp"
             android:layout_toRightOf="@id/projLabel"
             android:layout_marginStart="5dp"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             android:text="PrjectName" />
 
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_marginTop="26dp"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorPrimary"
             android:layout_below="@id/etProjectName"
             android:layout_toRightOf="@id/courseLabel"
             android:layout_marginStart="5dp"
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/etCourse"
             android:layout_marginStart="5dp"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             android:layout_toRightOf="@id/deadlineLabel"
             android:layout_marginTop="25dp"
@@ -131,7 +131,7 @@
             android:layout_toRightOf="@id/descriptionLabel"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="4dp"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorPrimary"
             android:text="Description" />
 
 </RelativeLayout>

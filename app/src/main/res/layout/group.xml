@@ -16,6 +16,7 @@
         android:layout_marginLeft="26dp"
         android:layout_marginRight="26dp"
         android:orientation="vertical"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/border"
         android:padding="10dp">
 
@@ -25,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textIsSelectable="true"
+            android:textColor="@color/textColor"
             android:textStyle="bold"
             tools:text="course" />
 
@@ -34,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textIsSelectable="true"
+            android:textColor="@color/textColor"
             android:textStyle="bold"
             tools:text="projectTitle" />
 
@@ -41,6 +44,7 @@
             android:id="@+id/projectDeadline"
             style="@style/TextAppearance.AppCompat.Small"
             android:layout_width="wrap_content"
+            android:textColor="@color/textColor"
             android:layout_height="wrap_content"
             android:textIsSelectable="true"
             tools:text="12/12/2018" />

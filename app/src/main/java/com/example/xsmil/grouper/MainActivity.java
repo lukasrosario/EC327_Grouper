@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        // reorganizes the recyclerview to display in descending order
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(true);
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseAuth.signOut();
+                firebaseAuth.signOut(); // built-in Firebase Authentication functionality to log out current user
                 finish();
                 Intent intent = new Intent(MainActivity.super.getBaseContext(), LoginActivity.class);
                 startActivity(intent);
@@ -108,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @NonNull
+    // implements an inherited function from the android library to build a recyclerview where each
+    // list item is a projectGroup as outlined in the groupHolder.java file
     protected RecyclerView.Adapter newAdapter() {
         FirebaseRecyclerOptions<projectGroup> options =
                 new FirebaseRecyclerOptions.Builder<projectGroup>()
@@ -116,12 +119,14 @@ public class MainActivity extends AppCompatActivity {
                     .build();
 
         return new FirebaseRecyclerAdapter<projectGroup, groupHolder>(options) {
+            // expands the recyclerview with each list item
             @Override
             public groupHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 return new groupHolder(LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.group, parent, false));
             }
 
+            // connects the front-end view with the projectGroup object model
             @Override
             protected void onBindViewHolder(@NonNull groupHolder holder, int position, @NonNull projectGroup model) {
                 holder.bind(model);

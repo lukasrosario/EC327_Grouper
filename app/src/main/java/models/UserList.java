@@ -31,8 +31,6 @@ public class UserList extends RecyclerView.ViewHolder{
     private View mView;
     private Context mContext;
 
-    private String groupID;
-
     private final TextView mName;
     private final TextView mEmail;
     private final TextView mUID;
@@ -49,14 +47,13 @@ public class UserList extends RecyclerView.ViewHolder{
         mUserContainer = itemView.findViewById(R.id.user_container);
         mUser = itemView.findViewById(R.id.userLayout);
 
-        mUserContainer.setMotionEventSplittingEnabled(false);
+        // mUserContainer.setMotionEventSplittingEnabled(false); // not needed for now, but will be helpful when implementing chat function in future
     }
 
     public void bind(@NonNull user user) {
         setName(user.firstName + user.lastName);
         setEmail(user.getEmail());
         setUID(user.uid);
-//        groupID = group.groupID;
     }
 
     private void setName(@Nullable String name) {
@@ -72,32 +69,3 @@ public class UserList extends RecyclerView.ViewHolder{
     }
 
 }
-
-/*public class UserList extends ArrayAdapter<user> {
-    private Activity context;
-    private DatabaseReference reference;
-    private List<user> userList;
-
-    public UserList(Activity context, List<user> userList){
-        super(context,R.layout.user_layout,userList);
-        this.context = context;
-        this.userList = userList;
-    }
-    @NonNull
-    @Override
-    public View getView(int position, @NonNull View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.user_layout,null,true);
-        TextView textViewName = (TextView) listViewItem.findViewById(R.id.etName);
-        TextView textViewEmail = (TextView) listViewItem.findViewById(R.id.etEmail);
-        TextView textViewUID = (TextView) listViewItem.findViewById(R.id.etUID);
-
-        user user1 = userList.get(position);
-
-        textViewName.setText(user1.getFirstName());
-        textViewEmail.setText(user1.getEmail());
-        textViewUID.setText(user1.getUid());
-
-        return listViewItem;
-    }
-}*/

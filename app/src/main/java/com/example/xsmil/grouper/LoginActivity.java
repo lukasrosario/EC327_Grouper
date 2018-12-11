@@ -1,6 +1,5 @@
 package com.example.xsmil.grouper;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -24,10 +23,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText editTextPassword;
     private TextView textViewSignup;
 
-
     private FirebaseAuth firebaseAuth;
-
-    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +38,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
         }
 
-        progressDialog = new ProgressDialog(this);
-
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         buttonSignIn = (Button) findViewById(R.id.buttonSignin);
@@ -54,7 +48,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void userLogin(){
-        //Retrieves email and password as strings from the 2 editTexts that the user entered.
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
@@ -69,15 +62,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        progressDialog.setMessage("Signing in...");
-        progressDialog.show();
 
-        // Signs in user by using FireBase function.
+        // Signs in user by using FireBase Authentication built-in functions.
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
 
                         // Closes current activity and starts MainActivity if the login is successful.
                         if(task.isSuccessful()){
@@ -86,7 +76,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                         // Displays error message is the login is not successful.
                         else {
-                            Toast toast = Toast.makeText(getApplicationContext(),"Sign in Failed", Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(getApplicationContext(),"Sign in Failed.", Toast.LENGTH_SHORT);
                             toast.show();
                         }
 

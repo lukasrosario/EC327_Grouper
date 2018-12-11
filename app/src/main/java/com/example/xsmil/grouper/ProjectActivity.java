@@ -54,8 +54,6 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
     private Button remove;
     private String val;
     private FirebaseAuth mAuth;
-    private List<user> userList;
-    private List<String> userID;
     private String currentUser;
     ListView listView;
 
@@ -88,12 +86,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
         databaseReferencemembers = FirebaseDatabase.getInstance().getReference("projectGroups").child(val).child("members");
         databaseReferenceUsers = FirebaseDatabase.getInstance().getReference("users");
 
-        userList = new ArrayList<user>();
-
-        userID = new ArrayList<String>();
-
         mAuth = FirebaseAuth.getInstance();
-
         currentUser = mAuth.getUid().trim();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.lView);
@@ -102,6 +95,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
+    // if current user is the group admin, display the delete group button
     private void isUserAdmin(){
         databaseReference.child("admin").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -123,6 +117,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
         super.onStart();
         attachRecyclerViewAdapter();
 
+        // reads the project group information from the database to render the textview displays
         databaseReference.child("projectTitle").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -135,6 +130,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 
             }
         });
+
         databaseReference.child("projectDeadline").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -158,6 +154,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 
             }
         });
+
         databaseReference.child("description").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -190,6 +187,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 
         mMemberIDsRef = FirebaseDatabase.getInstance().getReference().child("projectGroups").child(val).child("members");
 
+        // only retrieves the user information for users who are in the current project group
         FirebaseRecyclerOptions<user> options =
                 new FirebaseRecyclerOptions.Builder<user>()
                         .setIndexedQuery(mMemberIDsRef, sUsersQuery.getRef(), user.class)
@@ -197,12 +195,14 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
                         .build();
 
         return new FirebaseRecyclerAdapter<user, UserList>(options) {
+            // expands recyclerview with each list item
             @Override
             public UserList onCreateViewHolder(ViewGroup parent, int viewType) {
                 return new UserList(LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.user_layout, parent, false));
             }
 
+            // connects front-end view with user object model
             @Override
             protected void onBindViewHolder(@NonNull UserList holder, int position, @NonNull user model) {
                 holder.bind(model);
@@ -210,95 +210,10 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
         };
     }
 
-/*    @Override
-    protected void onStart() {
-        super.onStart();
 
-        FirebaseDatabase.getInstance().getReference("projectGroups").child(val).child("members").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userList.clear();
-
-                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    String userId = userSnapshot.getKey().toString();
-                    userID.add(userId);
-                }
-
-                databaseReferenceUsers.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
-                            if(userID.contains(dataSnapshot1.getKey())){
-                                user user1 = dataSnapshot1.getValue(user.class);
-                                userList.add(user1);
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                UserList adapter = new UserList(ProjectActivity.this, userList);
-                listView.setAdapter(adapter);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        databaseReference.child("projectTitle").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String name  = dataSnapshot.getValue(String.class);
-                projectName.setText(name);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        databaseReference.child("projectDeadline").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                deadline.setText(dataSnapshot.getValue(String.class));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        databaseReference.child("course").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Class.setText(dataSnapshot.getValue(String.class));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        databaseReference.child("description").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                description.setText(dataSnapshot.getValue(String.class));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }*/
-
-
-    //@Override
+    @Override
     public void onClick(View view) {
+        // when member leaves group, /projectGroup/groupID node is updated to reflect new members list
         if (view == leave){
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -329,6 +244,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 
         if(view == remove){
 
+            // warning/confirmation dialog displayed to the admin user when they click on the button to delete the group
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setMessage(R.string.deleteGroupAlert);
 
@@ -339,6 +255,9 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
                             // does nothing
                         }
                     })
+
+                    // user confirms the delete. use defined "destructor" method of projectGroup object
+                    // to update all necessary nodes in the database
                     .setPositiveButton("OK",new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,int which) {
                             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -362,6 +281,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    // when a user leaves a group, update the groups information under their node in the database
     public void removeGroupFromUserInDB(String groupID) {
 
         final String currentUid = mAuth.getCurrentUser().getUid();
@@ -387,7 +307,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void confirmationAlert() {
-        // Dialog pops up to allow user to confirm group has been successfully created
+        // Dialog pops up to allow user to confirm group has been successfully deleted
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage(R.string.deleteGroupConfirm);
 

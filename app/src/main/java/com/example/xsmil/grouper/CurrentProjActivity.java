@@ -70,10 +70,11 @@ public class CurrentProjActivity extends AppCompatActivity {
         setContentView(R.layout.activity_current_proj);
         ButterKnife.bind(this);
 
-        // Gets instance from FireBase Authentication in order store user.
+        // Gets instance from FireBase Authentication in order access the current user.
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseAuth.getCurrentUser();
 
+        // display the recycler view's list items in descending order
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(true);
@@ -82,7 +83,6 @@ public class CurrentProjActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Opens Create Group Activity.
         creategroupbutton = (Button) findViewById(R.id.CreateGroupBtn);
         creategroupbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,9 +108,7 @@ public class CurrentProjActivity extends AppCompatActivity {
         textViewUserEmail = (TextView) findViewById(R.id.TextViewUserEmail);
         textViewUserEmail.setText(user.getEmail());
 
-        // Retrieves first and last name from user class in FireBase Database
-        // References child node by passing unique user id.
-        // Concatenates the first and last name and sets the textView to display the Full Name.
+        // Retrieves user's first and last name information for display from the /users/uid node in the database
         textViewUserFull = (TextView) findViewById(R.id.textViewUserFull);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
@@ -150,6 +148,8 @@ public class CurrentProjActivity extends AppCompatActivity {
     }
 
     @NonNull
+    // implements an inherited function from the android library to build a recyclerview where each
+    // list item is a projectGroup as outlined in the groupHolder.java file
     protected RecyclerView.Adapter newAdapter() {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -157,17 +157,19 @@ public class CurrentProjActivity extends AppCompatActivity {
 
         FirebaseRecyclerOptions<projectGroup> options =
                 new FirebaseRecyclerOptions.Builder<projectGroup>()
-                        .setIndexedQuery(mGroupIndicesRef, sGroupsQuery.getRef(), projectGroup.class)
+                        .setIndexedQuery(mGroupIndicesRef, sGroupsQuery.getRef(), projectGroup.class) // retrieves projectGroup objects from /projectGroups node using list of groupIDs obtained by mGroupIndicesRef
                         .setLifecycleOwner(this)
                         .build();
 
         return new FirebaseRecyclerAdapter<projectGroup, groupHolder>(options) {
+            // expands the recyclerview with each list item
             @Override
             public groupHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 return new groupHolder(LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.group, parent, false));
             }
 
+            // connects the front-end view with the projectGroup object model
             @Override
             protected void onBindViewHolder(@NonNull groupHolder holder, int position, @NonNull projectGroup model) {
                 holder.bind(model);

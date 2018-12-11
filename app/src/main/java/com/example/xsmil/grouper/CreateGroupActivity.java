@@ -61,12 +61,12 @@ public class CreateGroupActivity extends AppCompatActivity {
         });
 
         // Pressing create creates new project group and saves information to database
-        // No way to update data appropriately right now... as soon as group is saved; information is "cleared"
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 createNewProjGroup();;
 
+                // Tried to start implementing functionality for updating group details
                 /*if (TextUtils.isEmpty(groupID)) {
                     createNewProjGroup();
                 }
@@ -78,6 +78,7 @@ public class CreateGroupActivity extends AppCompatActivity {
 
 //        toggleButton();
 
+        // Internal outputs to check that information is being read from the database correctly
         projectGroupRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
@@ -137,7 +138,7 @@ public class CreateGroupActivity extends AppCompatActivity {
     }*/
 
     public void createNewProjGroup() {
-        // Create new Project Group at /projectGroups
+        // Create new Project Group at /projectGroups with random key generation
         final String groupID = projectGroupRef.push().getKey();
 
         final EditText projectNameInput = (EditText) findViewById(R.id.proj_name);
@@ -191,7 +192,7 @@ public class CreateGroupActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Please enter the date with the format mm/dd/yyyy.", Toast.LENGTH_SHORT).show();
                         }
 
-                        // checks to make sure maximum capacity is a number entered. -- could probably do something similar for LocalDate, but need to know what exception would be thrown if not
+                        // checks to make sure maximum capacity is a number entered.
                         try {
                             int num = Integer.parseInt(maxCapacity);
                             Log.i("",num+" is a number");
@@ -202,6 +203,7 @@ public class CreateGroupActivity extends AppCompatActivity {
 
                         String currentUid = firebaseAuth.getCurrentUser().getUid();
 
+                        // creates new project group with user inputs, adds the user to the group, and adds the group to the database at /projectGroups
                         projectGroup projGroup = new projectGroup(course, teamName, projectName, LocalDate.parse(projectDeadlineString, formatter), description, Integer.parseInt(maxCapacity),currentUid);
                         projGroup.setGroupID(groupID);
                         projGroup.addMember(currentUid);
@@ -238,7 +240,9 @@ public class CreateGroupActivity extends AppCompatActivity {
                 .show();
     }
 
-    // need to figure this out
+    // when a group is created, the user who created the group needs to have his/her node updated in the database
+    // similarly, we update the projGroupMembers node in the database (this node isn't currently being utilized,
+    // but was implemented as part of the data structure to allow for quicker querying/enhance scalability)
     public void addGroupToUserInDB(String groupID) {
 
         final String currentUid = firebaseAuth.getCurrentUser().getUid();
@@ -247,10 +251,12 @@ public class CreateGroupActivity extends AppCompatActivity {
         userRef.child(currentUid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                // reads each user object at each userID node under /users
                 user currentUser = dataSnapshot.getValue(user.class);
                 currentUser.addGroup(groupIDFinal);
 
                 Map<String, Object> updatedUserValues = currentUser.toMap();
+                // inserts the updated user object into the current userID node under /users in the database
                 userRef.child(currentUid).setValue(updatedUserValues);
 
                 DatabaseReference projGroupMembersRef = db.child("projGroupMembers");

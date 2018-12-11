@@ -38,9 +38,10 @@ public class projectGroup {
     public Map<String, Boolean> members = new HashMap<>();
 
     public projectGroup() {
-        // Default constructor required for calls to DataSnapshot.getValue(Comment.class)
+        // Default constructor required for calls to DataSnapshot.getValue(projectGroup.class)
     }
 
+    // projectGroup constructor
     public projectGroup (String course, String teamName, String projectTitle, LocalDate projectDeadline, String descript, int maxCapacity, String admin) {
         this.course = course;
         this.teamName = teamName;
@@ -78,7 +79,6 @@ public class projectGroup {
     public int getCurrentNumMembers() {
         return currentNumMembers;
     }
-
 
     // defining a destructor for the projectGroup class
     public void removeGroup() {
@@ -147,6 +147,7 @@ public class projectGroup {
         return formattedFormGroupDeadline;
     }*/
 
+    // will be used to insert/update projectGroup objects in the database
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();

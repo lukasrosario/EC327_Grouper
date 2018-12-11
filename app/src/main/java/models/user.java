@@ -9,18 +9,16 @@ import java.util.List;
 import java.util.Map;
 
 
-// START users class
-
 @IgnoreExtraProperties
 public class user {
-    public String uid; //update to uid
+    public String uid;
     public String firstName;
     public String lastName;
     public String email;
     public Map<String, Boolean> projectGroups = new HashMap<>();
 
     public user() {
-        // Default constructor required for calls to DataSnapshot.getValue(Comment.class)
+        // Default constructor required for calls to DataSnapshot.getValue(user.class)
     }
 
     public user (String uid, String firstName, String lastName, String email) {
@@ -76,6 +74,7 @@ public class user {
         }
     }
 
+    // will be used to insert/update user object in database
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -88,5 +87,3 @@ public class user {
         return result;
     }
 }
-
-// END users class

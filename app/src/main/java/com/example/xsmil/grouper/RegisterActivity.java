@@ -1,6 +1,5 @@
 package com.example.xsmil.grouper;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -44,8 +43,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText editTextLastName;
     private TextView textViewSignin;
 
-    private ProgressDialog progressDialog;
-
     private FirebaseAuth firebaseAuth;
 
     private DatabaseReference db;
@@ -65,8 +62,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
         }
 
-        progressDialog = new ProgressDialog(this);
-
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -78,6 +73,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         buttonRegister.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
 
+        // internal checks & print-outs to make sure data is being accurately fetched from the database
         userRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
@@ -130,10 +126,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
-        progressDialog.setMessage("Registering User...");
-        progressDialog.show();
-
-        // Registers user to FireBase and adds user to users node in our real-time database.
+        // Registers user to FireBase Authentication and adds user to users node in our database.
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -149,7 +142,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         // error message if registration failed.
                         else {
                             Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
-                            progressDialog.dismiss();
                         }
 
                     }

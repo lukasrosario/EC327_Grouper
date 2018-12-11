@@ -52,7 +52,7 @@ public class groupHolder extends RecyclerView.ViewHolder implements View.OnClick
         mGroup = itemView.findViewById(R.id.group);
 
         itemView.setOnClickListener(this);
-        mGroupContainer.setMotionEventSplittingEnabled(false);
+        mGroupContainer.setMotionEventSplittingEnabled(false); // prevents activity from loading more than once when a list item is clicked on multiple times in succession
     }
 
     public void bind(@NonNull projectGroup group) {

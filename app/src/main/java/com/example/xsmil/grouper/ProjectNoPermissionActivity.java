@@ -113,6 +113,8 @@ public class ProjectNoPermissionActivity extends AppCompatActivity implements Vi
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     projectGroup Project = dataSnapshot.getValue(projectGroup.class);
                     int length  = Project.getCurrentNumMembers();
+                    String descript = dataSnapshot.child("description").getValue().toString();
+
                     if(length + 1 > Project.maxCapacity){
                         Toast.makeText(ProjectNoPermissionActivity.this, "Sorry this project has reached its maximum capacity", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
@@ -120,6 +122,7 @@ public class ProjectNoPermissionActivity extends AppCompatActivity implements Vi
                     }
                     else {
                         Project.addMember(currentUser);
+                        Project.setDescript(descript);
                         Map<String, Object> updatedGroupValues = Project.toMap();
                         databaseReference.updateChildren(updatedGroupValues);
 

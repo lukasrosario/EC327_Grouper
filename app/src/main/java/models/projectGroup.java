@@ -80,6 +80,14 @@ public class projectGroup {
         return currentNumMembers;
     }
 
+    public String getDescript() {
+        return this.descript;
+    }
+
+    public void setDescript(String descript) {
+        this.descript = descript;
+    }
+
     // defining a destructor for the projectGroup class
     public void removeGroup() {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();

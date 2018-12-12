@@ -219,7 +219,10 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     projectGroup Project = dataSnapshot.getValue(projectGroup.class);
+                    String descript = dataSnapshot.child("description").getValue().toString();
+
                     Project.removeMember(currentUser);
+                    Project.setDescript(descript);
 
                     Map<String, Object> updatedGroupValues = Project.toMap();
                     databaseReference.updateChildren(updatedGroupValues);
